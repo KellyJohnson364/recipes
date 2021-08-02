@@ -28,7 +28,7 @@ public class User {
     private List<Favorite> favorites;
 
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Notes> notes;
+    private List<Note> notes;
 
 
     public User(Integer id, String username, String email, String password) {
@@ -96,11 +96,11 @@ public class User {
         this.favorites = favorites;
     }
 
-    public List<Notes> getNotes() {
+    public List<Note> getNotes() {
         return notes;
     }
 
-    public void setNotes(List<Notes> notes) {
+    public void setNotes(List<Note> notes) {
         this.notes = notes;
     }
 
