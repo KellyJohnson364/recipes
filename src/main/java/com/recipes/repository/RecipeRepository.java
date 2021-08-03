@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PostRepository extends JpaRepository<Recipe, Integer> {
+public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     List<Recipe> findAllRecipesByUserId(Integer id) throws Exception;
 
 }
