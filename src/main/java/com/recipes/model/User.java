@@ -25,7 +25,7 @@ public class User {
     private List<Recipe> recipes;
 
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Favorite> favorites;
+    private List<Vote> votes;
 
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Note> notes;
@@ -88,12 +88,12 @@ public class User {
         this.recipes = recipes;
     }
 
-    public List<Favorite> getFavorites() {
-        return favorites;
+    public List<Vote> getFavorites() {
+        return votes;
     }
 
-    public void setFavorites(List<Favorite> favorites) {
-        this.favorites = favorites;
+    public void setFavorites(List<Vote> favorites) {
+        this.votes = votes;
     }
 
     public List<Note> getNotes() {
@@ -115,13 +115,13 @@ public class User {
                 Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(recipes, user.recipes) &&
-                Objects.equals(favorites, user.favorites) &&
+                Objects.equals(votes, user.votes) &&
                 Objects.equals(notes, user.notes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, password, loggedIn, recipes, favorites, notes);
+        return Objects.hash(id, username, email, password, loggedIn, recipes, votes, notes);
     }
 
     @Override
@@ -133,7 +133,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", loggedIn=" + loggedIn +
                 ", recipes=" + recipes +
-                ", favorites=" + favorites +
+                ", votes=" + votes +
                 ", notes=" + notes +
                 '}';
     }

@@ -21,7 +21,7 @@ public class Recipe {
     @Transient
     private String userName;
     @Transient
-    private Boolean isFavorite;
+    private int voteCount;
     private Integer userId;
 
     @NotNull
@@ -37,11 +37,11 @@ public class Recipe {
     @OneToMany(mappedBy = "recipeId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Note> notes;
 
-    public Recipe(Integer id, String title, String recipeUrl, Boolean isFavorite, Integer userId) {
+    public Recipe(Integer id, String title, String recipeUrl, int voteCount, Integer userId) {
         this.id = id;
         this.title = title;
         this.recipeUrl = recipeUrl;
-        this.isFavorite = isFavorite;
+        this.voteCount = voteCount;
         this.userId = userId;
     }
 
@@ -77,13 +77,9 @@ public class Recipe {
         this.userName = userName;
     }
 
-    public Boolean getFavorite() {
-        return isFavorite;
-    }
+    public int getVoteCount() { return voteCount; }
 
-    public void setFavorite(Boolean favorite) {
-        isFavorite = favorite;
-    }
+    public void setVoteCount(int voteCount) { this.voteCount = voteCount; }
 
     public Integer getUserId() {
         return userId;
@@ -122,12 +118,12 @@ public class Recipe {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Recipe recipe = (Recipe) o;
-        return Objects.equals(id, recipe.id) && Objects.equals(title, recipe.title) && Objects.equals(recipeUrl, recipe.recipeUrl) && Objects.equals(userName, recipe.userName) && Objects.equals(isFavorite, recipe.isFavorite) && Objects.equals(userId, recipe.userId) && Objects.equals(postedAt, recipe.postedAt) && Objects.equals(updatedAt, recipe.updatedAt) && Objects.equals(notes, recipe.notes);
+        return Objects.equals(id, recipe.id) && Objects.equals(title, recipe.title) && Objects.equals(recipeUrl, recipe.recipeUrl) && Objects.equals(userName, recipe.userName) && Objects.equals(userId, recipe.userId) && Objects.equals(postedAt, recipe.postedAt) && Objects.equals(updatedAt, recipe.updatedAt) && Objects.equals(notes, recipe.notes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, recipeUrl, userName, isFavorite, userId, postedAt, updatedAt, notes);
+        return Objects.hash(id, title, recipeUrl, userName, voteCount, userId, postedAt, updatedAt, notes);
     }
 
     @Override
@@ -137,7 +133,7 @@ public class Recipe {
                 ", title='" + title + '\'' +
                 ", recipeUrl='" + recipeUrl + '\'' +
                 ", userName='" + userName + '\'' +
-                ", isFavorite=" + isFavorite +
+                ", voteCount=" + voteCount +
                 ", userId=" + userId +
                 ", postedAt=" + postedAt +
                 ", updatedAt=" + updatedAt +

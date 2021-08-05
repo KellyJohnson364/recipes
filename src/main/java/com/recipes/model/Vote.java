@@ -7,15 +7,15 @@ import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "favorite")
-public class Favorite {
+@Table(name = "vote")
+public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private Integer userId;
     private Integer recipeId;
 
-    public Favorite(Integer id, Integer userId, Integer recipeId) {
+    public Vote(Integer id, Integer userId, Integer recipeId) {
         this.id = id;
         this.userId = userId;
         this.recipeId = recipeId;
@@ -49,8 +49,8 @@ public class Favorite {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Favorite favorite = (Favorite) o;
-        return Objects.equals(id, favorite.id) && Objects.equals(userId, favorite.userId) && Objects.equals(recipeId, favorite.recipeId);
+        Vote vote = (Vote) o;
+        return Objects.equals(id, vote.id) && Objects.equals(userId, vote.userId) && Objects.equals(recipeId, vote.recipeId);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Favorite {
 
     @Override
     public String toString() {
-        return "Favorite{" +
+        return "Vote{" +
                 "id=" + id +
                 ", userId=" + userId +
                 ", recipeId=" + recipeId +

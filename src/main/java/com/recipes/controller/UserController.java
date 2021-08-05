@@ -2,8 +2,8 @@ package com.recipes.controller;
 
 import com.recipes.model.Recipe;
 import com.recipes.model.User;
-import com.recipes.repository.FavoriteRepository;
 import com.recipes.repository.UserRepository;
+import com.recipes.repository.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -17,7 +17,7 @@ public class UserController {
     UserRepository repository;
 
     @Autowired
-    FavoriteRepository favoriteRepository;
+    VoteRepository favoriteRepository;
 
     @GetMapping("/api/users")
     public List<User> getAllUsers() {
@@ -25,7 +25,7 @@ public class UserController {
         for (User u : userList) {
             List<Recipe> recipeList = u.getRecipes();
             for (Recipe p : recipeList) {
-                p.setFavorite(favoriteRepository.isFavoriteByRecipeId(p.getId()));
+                p.setVoteCount(favoriteRepository.countVotesByRecipeId(p.getId()));
             }
         }
         return userList;
@@ -36,7 +36,7 @@ public class UserController {
         User returnUser = repository.getOne(id);
         List<Recipe> postList = returnUser.getRecipes();
         for (Recipe p : postList) {
-            p.setFavorite(favoriteRepository.isFavoriteByRecipeId(p.getId()));
+            p.setVoteCount(favoriteRepository.countVotesByRecipeId(p.getId()));
         }
 
         return returnUser;

@@ -25,7 +25,7 @@ public class NoteController {
     public Note createNote(@RequestBody Note note) {
         return repository.save(note);
     }
-    @PutMapping("/api/updatenote")
+    @PutMapping("/api/update/notes")
     public Note updateNote(@RequestBody Note note) {
         return repository.save(note);
     }
