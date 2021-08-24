@@ -15,6 +15,8 @@ public class Vote {
     private Integer userId;
     private Integer recipeId;
 
+    public Vote(){}
+
     public Vote(Integer id, Integer userId, Integer recipeId) {
         this.id = id;
         this.userId = userId;

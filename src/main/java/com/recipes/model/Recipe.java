@@ -37,6 +37,8 @@ public class Recipe {
     @OneToMany(mappedBy = "recipeId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Note> notes;
 
+    public Recipe(){};
+
     public Recipe(Integer id, String title, String recipeUrl, int voteCount, Integer userId) {
         this.id = id;
         this.title = title;
@@ -81,37 +83,21 @@ public class Recipe {
 
     public void setVoteCount(int voteCount) { this.voteCount = voteCount; }
 
-    public Integer getUserId() {
-        return userId;
-    }
+    public Integer getUserId() { return userId; }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+    public void setUserId(Integer userId) { this.userId = userId; }
 
-    public Date getPostedAt() {
-        return postedAt;
-    }
+    public Date getPostedAt() { return postedAt; }
 
-    public void setPostedAt(Date postedAt) {
-        this.postedAt = postedAt;
-    }
+    public void setPostedAt(Date postedAt) { this.postedAt = postedAt; }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+    public Date getUpdatedAt() { return updatedAt; }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+    public void setUpdatedAt(Date updatedAt) { this.updatedAt = updatedAt; }
 
-    public List<Note> getNotes() {
-        return notes;
-    }
+    public List<Note> getNotes() { return notes; }
 
-    public void setNotes(List<Note> notes) {
-        this.notes = notes;
-    }
+    public void setNotes(List<Note> notes) { this.notes = notes; }
 
     @Override
     public boolean equals(Object o) {

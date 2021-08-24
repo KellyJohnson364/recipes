@@ -17,15 +17,15 @@ public class UserController {
     UserRepository repository;
 
     @Autowired
-    VoteRepository favoriteRepository;
+    VoteRepository voteRepository;
 
     @GetMapping("/api/users")
     public List<User> getAllUsers() {
         List<User> userList = repository.findAll();
         for (User u : userList) {
             List<Recipe> recipeList = u.getRecipes();
-            for (Recipe p : recipeList) {
-                p.setVoteCount(favoriteRepository.countVotesByRecipeId(p.getId()));
+            for (Recipe r : recipeList) {
+                r.setVoteCount(voteRepository.countVotesByRecipeId(r.getId()));
             }
         }
         return userList;
@@ -34,9 +34,9 @@ public class UserController {
     @GetMapping("/api/users/{id}")
     public User getUserById(@PathVariable Integer id) {
         User returnUser = repository.getOne(id);
-        List<Recipe> postList = returnUser.getRecipes();
-        for (Recipe p : postList) {
-            p.setVoteCount(favoriteRepository.countVotesByRecipeId(p.getId()));
+        List<Recipe> recipeList = returnUser.getRecipes();
+        for (Recipe r : recipeList) {
+            r.setVoteCount(voteRepository.countVotesByRecipeId(r.getId()));
         }
 
         return returnUser;

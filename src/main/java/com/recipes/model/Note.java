@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "comment")
+@Table(name = "note")
 public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,6 +15,8 @@ public class Note {
     private String noteText;
     private Integer userId;
     private Integer recipeId;
+
+    public Note(){};
 
     public Note(Integer id, String noteText, Integer userId, Integer recipeId) {
         this.id = id;
