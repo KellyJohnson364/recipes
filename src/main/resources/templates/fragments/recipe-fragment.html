@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Recipes</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<article class="recipe" th:fragment="recipe-fragment">
+    <div class="title">
+        <a th:href="@{ ${recipe.recipeUrl} }" target="_blank">[[${recipe.title}]]</a>
+
+        <div th:if="${#strings.contains(recipe.recipeUrl, 'http://')}">
+            <div th:with="arg=${#strings.replace(recipe.recipeUrl,'http://','')}">
+                <div th:if="${#strings.contains(arg, '/')}">
+                    <div th:with="arg2=${#strings.arraySplit(arg, '/')}">
+                        <span th:text="${#strings.toString(arg2[0])}"></span>
+                    </div>
+                </div>
+                <div th:unless="${#strings.contains(arg, '/')}">
+                    <div th:if="${#strings.contains(arg, '?')}">
+                        <div th:with="arg2=${#strings.arraySplit(arg, '?')}">
+                            <span th:text="${#strings.toString(arg2[0])}"></span>
+                        </div>
+                    </div>
+                    <div th:unless="${#strings.contains(arg, '?')}">
+                        <span th:text="${#strings.toString(arg)}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${#strings.contains(recipe.recipeUrl, 'https://')}">
+            <div th:with="arg=${#strings.replace(recipe.recipeUrl,'https://','')}">
+                <div th:if="${#strings.contains(arg, '/')}">
+                    <div th:with="arg2=${#strings.arraySplit(arg, '/')}">
+                        <span th:text="${#strings.toString(arg2[0])}"></span>
+                    </div>
+                </div>
+                <div th:unless="${#strings.contains(arg, '/')}">
+                    <div th:if="${#strings.contains(arg, '?')}">
+                        <div th:with="arg2=${#strings.arraySplit(arg, '?')}">
+                            <span th:text="${#strings.toString(arg2[0])}"></span>
+                        </div>
+                    </div>
+                    <div th:unless="${#strings.contains(arg, '?')}">
+                        <span th:text="${#strings.toString(arg)}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${#strings.contains(recipe.recipeUrl, 'www.')}">
+            <div th:with="arg=${#strings.replace(recipe.recipeUrl,'www.','')}">
+                <div th:if="${#strings.contains(arg, '/')}">
+                    <div th:with="arg2=${#strings.arraySplit(arg, '/')}">
+                        <span th:text="${#strings.toString(arg2[0])}"></span>
+                    </div>
+                </div>
+                <div th:unless="${#strings.contains(arg, '/')}">
+                    <div th:if="${#strings.contains(arg, '?')}">
+                        <div th:with="arg2=${#strings.arraySplit(arg, '?')}">
+                            <span th:text="${#strings.toString(arg2[0])}"></span>
+                        </div>
+                    </div>
+                    <div th:unless="${#strings.contains(arg, '?')}">
+                        <span th:text="${#strings.toString(arg)}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${recipe.voteCount == 1}" class="meta">
+            [[${recipe.voteCount}]] point by [[${recipe.userName}]] on
+            <span th:text="${#dates.format(recipe.postedAt, 'MM-dd-YY')}"></span>
+
+            <a th:href="@{/recipe/{id}(id=${recipe.id})}" th:if="${recipe.notes.size() == 1}">[[${recipe.notes.size()}]]
+                note</a>
+            <a th:href="@{/recipe/{id}(id=${recipe.id})}" th:unless="${recipe.notes.size() == 1}">[[${recipe.notes.size()}]]
+                notes</a>
+        </div>
+        <div th:unless="${recipe.voteCount == 1}" class="meta">
+            [[${recipe.voteCount}]] points by [[${recipe.userName}]] on
+            <span th:text="${#dates.format(recipe.postedAt, 'MM-dd-YY')}"></span>
+            |
+            <a th:href="@{/recipe/{id}(id=${recipe.id})}" th:if="${recipe.notes.size() == 1}">[[${recipe.notes.size()}]]
+                note</a>
+            <a th:href="@{/recipe/{id}(id=${recipe.id})}" th:unless="${recipe.notes.size() == 1}">[[${recipe.notes.size()}]]
+                notes</a>
+        </div>
+    </div>
+</article>
+
+</body>

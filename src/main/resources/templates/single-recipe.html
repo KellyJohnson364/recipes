@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title>Single-recipe</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+  <div th:if="${notice}" class="flash-message">
+    <h3>[[${notice}]]</h3>
+  </div>
+
+  <div th:insert="fragments/recipe-fragment :: recipe-fragment"></div>
+
+
+  <form th:if="${loggedIn}" action="#" th:action="@{/notes}" th:object="${note}" method="post" class="note-form">
+    <div>
+      <input type="hidden" th:value="${recipe.id}" name="recipeId"/>
+      <textarea name="note-body" th:field="*{noteText}"></textarea>
+    </div>
+
+    <div>
+      <button type="submit">add note</button>
+      <button type="button" class="upvote-btn">upvote</button>
+    </div>
+  </form>
+
+  <div class="notes">
+    <div th:insert="fragments/note-fragment :: note-fragment"></div>
+  </div>
+  <div th:if="${loggedIn}">
+    <script src="/js/upvote.js"></script>
+  </div>
+
+</div>
+
+</body>
+</html>

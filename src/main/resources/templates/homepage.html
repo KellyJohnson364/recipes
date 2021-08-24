@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Homepage</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <ol>
+        <li th:each="recipe : ${recipeList}" class="recipe-list">
+            <div th:insert="fragments/recipe-fragment :: recipe-fragment"></div>
+        </li>
+    </ol>
+</div>
+
+</body>
+</html>

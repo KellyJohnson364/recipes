@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title>Dashboard</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+  <div th:if="${notice}" class="flash-message">
+    <h3>[[${notice}]]</h3>
+  </div>
+
+  <section>
+    <h2>Create New Recipe</h2>
+
+    <form action="#" th:action="@{/recipes}" th:object="${recipe}" method="post" class="new-recipe-form">
+      <div>
+        <label for="recipe-title">Title</label>
+        <input type="text" th:field="*{title}" id="recipe-title" name="recipe-title"/>
+      </div>
+      <div>
+        <label for="recipe-url">Link</label>
+        <input type="text" th:field="*{recipeUrl}" id="recipe-url" name="recipe-url"/>
+      </div>
+      <button type="submit" class="btn">Create</button>
+    </form>
+  </section>
+
+  <section th:if="${recipeList.size() > 0}">
+    <h2>Your Recipes</h2>
+    <ol>
+      <li th:each="recipe : ${recipeList}">
+        <div th:insert="fragments/recipe-fragment :: recipe-fragment"></div>
+        <a th:href="@{/dashboard/edit/{id}(id=${recipe.id})}" class="edit-link">Edit recipe</a>
+      </li>
+    </ol>
+  </section>
+
+</div>
+
+
+</body>
+</html>
